@@ -9,7 +9,7 @@ package suffersquad;
  *
  * @author Shannon
  */
-public class Dragon implements Character {
+public class Player implements Character{
 
     @Override
     public String name(String name) {
