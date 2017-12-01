@@ -9,7 +9,7 @@ package dragondungeongame;
  *
  * @author Shannon
  */
-public class Medium extends Dragon {
+public class MediumDragon extends Dragon {
     
      Random rand = new Random();
 
