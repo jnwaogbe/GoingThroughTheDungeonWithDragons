@@ -10,11 +10,11 @@ package dragondungeongame;
  * @author Shannon
  * BO$$
  */
-public class Boss extends Dragon{
+public class BossDragon extends Dragon{
     
     Random rand = new Random();
 
-    public Bo$$Dragon(int dlevel, String dname, treasure dtype) {
+    public BossDragon(int dlevel, String dname, treasure dtype) {
         super(dlevel, dname, dtype);
         
        
