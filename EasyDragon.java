@@ -9,7 +9,7 @@ package dragondungeongame;
  *
  * @author Shannon
  */
-public class Easy extends Dragon{
+public class EasyDragon extends Dragon{
     
     import java.util.Random;
 
