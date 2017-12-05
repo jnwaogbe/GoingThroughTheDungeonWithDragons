@@ -66,6 +66,17 @@ public class WordGame {
                         {"What is a drawback to using a Linked List?", "Nothing. It is a very useful data structure.", "You can't randomly access an element, and must traverse the entire structure.", "It wastes a lot of memory.", "It's really annoying to use.", "2"},
                         {"Which of these is not a feline?", "Tiger", "Lion", "Cougar", "Wolf", "4"}, //19
                         {"Who is the fourth president of the United States?", "James Madison", "Thomas Jefferson", "Benjamin Franklin", "James Polk", "1"} 
+                        {"Which MLB pitcher has the most career wins?", "Babe Ruth", "Cy Young", "Nolan Ryan", "Randy Johnson", "2"},
+                        {"Which of these is not a famous viner?", "Logan Paul", "Lele Pons", "King Bach", "Smosh", "4"},
+                        {"Who was the first winner of American Idol?", "Carrie Underwood", "Kelly Clarkson", "Katherine McPhee", "Kelli Pickler", "2"},
+                        {"What flavor is not in Neapolitan ice cream?", "Strawberry", "Chocolate", "Vanilla", "Mango", "4"},
+                        {"Where did French Fries originate?", "France", "Italy", "England", "Belgium", "4"}, //25
+                        {"What is in Neapolitan ice cream?", "French Vanilla", "Vanilla", "Vanilla Bean", "Classic Vanilla", "2"},
+                        {"Who plays Aslan in the 2006 remake of the Lion, the Witch, and the Wardrobe?", "Morgan Freeman", "Liam Neeson", "Alan Rickman", "James Earl Jones", "2"},
+                        {"Who plays Captain America?", "Chris Evans", "Chris Pine", "Chris Pratt", "Chris Hemsworth", "1"},
+                        {"Who plays Thor?", "Chris Evans", "Chris Pine", "Chris Pratt", "Chris Hemsworth", "4"},
+                        {"Who plays Star Lord?", "Chris Evans", "Chris Pine", "Chris Pratt", "Chris Hemsworth", "3"}, //30
+                        {"Who plays Captain Kirk?", "Chris Evans", "Chris Pine", "Chris Pratt", "Chris Hemsworth", "2"}
                             
                         
                      
