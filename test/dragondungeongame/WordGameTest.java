@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
  *
  * @author Me
  */
+
 public class WordGameTest {
     
     public WordGameTest() {

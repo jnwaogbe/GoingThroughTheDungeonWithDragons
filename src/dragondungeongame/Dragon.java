@@ -5,9 +5,12 @@ package dragondungeongame;
  */
 public class Dragon implements Character {
     
-    int level;
-    String name;
-    Treasure type;
+    private int level;
+    private String name;
+    private Treasure type;
+    private boolean friend;
+    private int health;
+    private int attack;
     
     public Dragon(int dlevel, String dname, Treasure dtype) {
     
@@ -17,17 +20,22 @@ public class Dragon implements Character {
     }
 
     @Override
-    public String name(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getName() {
+        return name;
     }
 
     @Override
-    public String difficulty(String level) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getHealth() {
+        return health;
     }
 
     @Override
-    public int health(int ihealth) {
+    public int getAttack() {
+        return attack;
+    }
+
+    @Override
+    public int getDefense() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -41,4 +49,17 @@ public class Dragon implements Character {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    
+    public String getDifficulty() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void befriend() {
+        friend = false;
+    }
+    
+    public boolean isFriend() {
+        return friend;
+    }
+
 }

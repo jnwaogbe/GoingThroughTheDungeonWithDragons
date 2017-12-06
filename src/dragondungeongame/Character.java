@@ -13,12 +13,13 @@ package dragondungeongame;
 public interface Character {
     //name
     //will return the name of the dragon
-    public String name(String name);
-    //difficulty
-    //will return the difficulty level of each dragon
-    public String difficulty(String level);
+    public String getName();
+  
     //health
-    public int health(int ihealth);
+    public int getHealth();
+    
+    public int getAttack();
+    public int getDefense();
     //attack //player may take what is returned from here into a damage thing
     //might want to have it initially take the multiplier and attack will have a
     //set amount and powermult multiplies it and amplifies the hit
