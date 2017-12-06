@@ -65,7 +65,7 @@ public class WordGame {
                         {"Who did Anne Hathaway play in the Princess Diaries?", "Princess Maya", "Princess Merida", "Princess Mia", "Princess Mary", "3"},
                         {"What is a drawback to using a Linked List?", "Nothing. It is a very useful data structure.", "You can't randomly access an element, and must traverse the entire structure.", "It wastes a lot of memory.", "It's really annoying to use.", "2"},
                         {"Which of these is not a feline?", "Tiger", "Lion", "Cougar", "Wolf", "4"}, //19
-                        {"Who is the fourth president of the United States?", "James Madison", "Thomas Jefferson", "Benjamin Franklin", "James Polk", "1"} 
+                        {"Who is the fourth president of the United States?", "James Madison", "Thomas Jefferson", "Benjamin Franklin", "James Polk", "1"}, 
                         {"Which MLB pitcher has the most career wins?", "Babe Ruth", "Cy Young", "Nolan Ryan", "Randy Johnson", "2"},
                         {"Which of these is not a famous viner?", "Logan Paul", "Lele Pons", "King Bach", "Smosh", "4"},
                         {"Who was the first winner of American Idol?", "Carrie Underwood", "Kelly Clarkson", "Katherine McPhee", "Kelli Pickler", "2"},
