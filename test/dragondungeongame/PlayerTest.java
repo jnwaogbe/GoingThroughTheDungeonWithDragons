@@ -9,23 +9,19 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
- * @author Jessica
+ * @author Shannon
  */
 public class PlayerTest {
-   
-    public PlayerTest() {
-    }
     
-    @BeforeClass
-    public static void setUpClass() {
-
-    }
+Player player;
     
-    @AfterClass
-    public static void tearDownClass() {
+    @Before
+    public void setup() {
+        player = new Player(10, "player" , 10);
     }
 
     /**
@@ -34,12 +30,9 @@ public class PlayerTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        Player instance = null;
-        String expResult = "";
+        Player instance = player;
+        String expResult = "player";
         String result = instance.getName();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -48,45 +41,13 @@ public class PlayerTest {
     @Test
     public void testGetHealth() {
         System.out.println("getHealth");
-        Player instance = null;
-        int expResult = 0;
+        Player instance = player;
+        int expResult = 30;
         int result = instance.getHealth();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getAttack method, of class Player.
-     */
-    @Test
-    public void testGetAttack() {
-        System.out.println("getAttack");
-        Player instance = null;
-        int expResult = 0;
-        int result = instance.getAttack();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of getDefense method, of class Player.
-     */
-    @Test
-    public void testGetDefense() {
-        System.out.println("getDefense");
-        Player instance = null;
-        int expResult = 0;
-        int result = instance.getDefense();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of attack method, of class Player.
-     */
     @Test
     public void testAttack() {
         System.out.println("attack");
@@ -95,8 +56,6 @@ public class PlayerTest {
         int expResult = 0;
         int result = instance.attack(powermult);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -105,13 +64,30 @@ public class PlayerTest {
     @Test
     public void testDefense() {
         System.out.println("defense");
+        int attack = 0;
         int guard = 0;
         Player instance = null;
         int expResult = 0;
-        int result = instance.defense(guard);
+        int result = instance.defense(attack, guard);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+    
+    //if player won the word game, attack was increased
+    @Test
+    public void gameWonAttackIncrease(){
+    
+    }
+    
+    //if collected item/level passed, defense increases
+    @Test
+    public void levelUpDefenseIncrease(){
+    
+    }
+    
+    //if friend flag set to true, addition to health
+    @Test
+    public void friendFlagHealthAddition(){
+    
     }
     
 }
