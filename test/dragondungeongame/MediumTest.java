@@ -23,9 +23,9 @@ WordGame wg;
     
     @Before
     public void setup() {
-        medium = new Medium("easy");
+        medium = new Medium("medium");
         player = new Player("player");
-        wg = new WordGame("easy");
+        wg = new WordGame("medium);
     }
     
     //test to see if the player takes damage
