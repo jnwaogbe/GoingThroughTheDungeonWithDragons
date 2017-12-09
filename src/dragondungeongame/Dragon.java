@@ -1,22 +1,27 @@
 package dragondungeongame;
+
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  *
  * @author Shannon
  */
 public class Dragon implements Character {
     
-    private int level;
-    private String name;
-    private Treasure type;
-    private boolean friend;
-    private int health;
-    private int attack;
+    public int Difficulty;
+    public String name;
+    public Treasure tType;
+    public int health;
+    public int defense;
+    public int attackPower;
+    public Random rand = new Random();
     
-    public Dragon(int dlevel, String dname, Treasure dtype) {
+    public Dragon(String dname) {
     
-        level = dlevel;
+    //    Difficulty = dDifficulty;
         name = dname;
-        type = dtype;
+                
     }
 
     @Override
@@ -31,35 +36,108 @@ public class Dragon implements Character {
 
     @Override
     public int getAttack() {
-        return attack;
+        return attackPower;
     }
 
     @Override
     public int getDefense() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return defense;
     }
 
     @Override
-    public int attack(int powermult) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int attack(int playerDefense) {
+              
+      
+        return 0;
+    
+    
+    }
+    
+    public void takeDamage(int damage){
+        health = health - damage;
     }
 
-    @Override
-    public int defense(int guard) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void getTreasure(){
+        
+        int treas = rand.nextInt(3);
+        String treasu;
+        
+        switch(treas){
+            case 1: 
+                treasu = "sleep";
+                break;
+            case 2: 
+                treasu = "treasure";
+                break;
+            default: 
+                treasu = "food";
+                break;
+            
+        }
+        
+       
+        tType = new Treasure(treasu); 
     }
     
     
+   
+   public boolean greeting(){
+       
+       Scanner reader =  reader = new Scanner(System.in);
+       
+       
+
+       System.out.println("\n\nDragon: " + this.name + 
+               "\n Health: " + this.health + 
+               "\n Power: " + this.attackPower + 
+               "\n Defense: " + this.defense
+       );
+       
+       if(this.health > 0){
+               System.out.println("Would you like to attack? Hit y for yes and any other key for no.");
+       
+             
+       if("y".equals(reader.nextLine())){
+           return true;
+       }
+       
+       else{
+           return false;}
+       }
+       else{
+           System.out.println("Congrats! You beat the beast!");
+           return true;
+       }
+   }
+    
+        
+    
+    @Override
     public String getDifficulty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void befriend() {
-        friend = false;
-    }
-    
-    public boolean isFriend() {
-        return friend;
-    }
+        
+        String Diff = "";
+        
+        if(Difficulty == 1){
+            Diff = "easy";
+        }
+        else if(Difficulty == 2){
+            Diff = "medium";
+        }
+        else if(Difficulty == 3){
+            Diff = "hard";
+        }
+        else if(Difficulty == 4){
+            Diff = "boss";
+        }
+        
+        return Diff;
+        }
 
-}
+    
+        
+    
+        
+        
+        }
+
+
