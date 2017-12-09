@@ -19,8 +19,6 @@ public class MediumDragon extends Dragon {
         this.health = 25;
         this.attackPower = 10;
         this.defense = 10;
-        
-       
     }
     
        @Override
@@ -29,7 +27,6 @@ public class MediumDragon extends Dragon {
        return "medium";
    
    }
-    
     
     @Override
     public int attack(int playerDefense) {
@@ -46,8 +43,22 @@ public class MediumDragon extends Dragon {
         }
         
         return hit;
+    }
     
+    @Override
+    public void defeated(){
+        if (health == 0){
+            defeated = true;
+            System.out.println("The dragon has been defeated!");
+        }
+    } 
     
+    @Override
+    public void befriend(boolean won){
+        if (won == true){
+            friend = true;
+            System.out.println("Item obtained");
+        }
     }
 }
     
