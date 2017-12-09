@@ -22,7 +22,6 @@ public class TreasureTest {
     
     @Before
     public void setup() {
-        //this should not be commented it out but idk whats wrong with it so
         player = new Player(10, "bet" , 10);
         sleep = new Treasure("sleep");
         food = new Treasure("food");
