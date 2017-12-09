@@ -195,8 +195,6 @@ public class WordGame {
             
         }
         
-        reader.close();
-        
         if(Win){
                System.out.println("Congratulations! The beast is now on your side!\n"
                        + "She will aid you in fighting the master of the dungeon. \n"
