@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package suffersquad;
+package dragondungeongame;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -21,7 +21,6 @@ Medium medium;
     
     @Before
     public void setup() {
-        //this should not be commented it out but idk whats wrong with it so
         medium = new Medium(5, "medium" , 8);
     }
     
