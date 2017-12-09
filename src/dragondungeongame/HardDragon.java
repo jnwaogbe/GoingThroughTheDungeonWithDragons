@@ -1,32 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dragondungeongame;
 
 /**
  *
  * @author Me
  */
-
-import java.util.Random;
-
-public class MediumDragon extends Dragon {
+public class HardDragon extends Dragon{
     
     boolean defeated = false;
     boolean friend = false;
     
-    Random rand = new Random();
+    
 
-    public MediumDragon(String dname) {
+    public HardDragon( String dname) {
         super(dname);
-        this.health = 25;
-        this.attackPower = 10;
-        this.defense = 10;
+        this.health = 40;
+        this.attackPower = 17;
+        this.defense = 17;
         
-       
     }
+    
     
        @Override
    public String getDifficulty(){
        
-       return "medium";
+       return "hard";
    
    }
     
@@ -35,7 +37,7 @@ public class MediumDragon extends Dragon {
     public int attack(int playerDefense) {
               
      int hit;        
-        int attackNum = rand.nextInt(17)+10;
+        int attackNum = rand.nextInt(25)+17;
         
         if(attackNum > playerDefense){
             hit = attackNum - playerDefense;
@@ -50,6 +52,3 @@ public class MediumDragon extends Dragon {
     
     }
 }
-    
-    
-

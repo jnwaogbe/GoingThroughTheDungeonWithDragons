@@ -11,6 +11,8 @@ package dragondungeongame;
  */
 public class EasyDragon extends Dragon{
     
+    boolean defeated = false;
+    boolean friend = false;
     
     
     
