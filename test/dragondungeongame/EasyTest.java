@@ -4,7 +4,7 @@
  * and open the template in the editor.
 demonstration of user stories with a quick guided tour of your class diagram
  */
-package suffersquad;
+package dragondungeongame;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -22,7 +22,6 @@ Easy easy;
     
     @Before
     public void setup() {
-        //this should not be commented it out but idk whats wrong with it so
         easy = new Easy(3, "easy" , 5);
     }
     
