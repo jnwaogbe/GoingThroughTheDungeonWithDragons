@@ -15,24 +15,48 @@ import org.junit.Before;
  *
  * @author Shannon
  */
+
 public class BossTest {
-    
-Boss boss;
+
+    Boss boss;
+    Player player;
     
     @Before
     public void setup() {
-        boss = new Boss(10, "BO$$" , 16);
+        boss = new Boss("boss", 1);
+        player = new Player("player");
     }
     
-//if the hit is above four the dragon should take damage
+    //test to see if the player takes damage
     @Test
-    public void doesithit() {
+    public void getHit() {
+        int health, hit, hitHealth; 
         
-        if (boss.defense(17,16) > 16){
-            assertTrue("This will pass if over 16", true);
-        }
+        health = player.health;
+        hit = boss.attack(-1);
+        hitHealth = health - hit;
+        
+        assertTrue(health > hitHealth);        
+    }
+    
+    //checks to see if no damage is taken on a missed roll
+    @Test
+    public void miss(){
+        int health, hit, hitHealth; 
+        
+        health = player.health;
+        hit = boss.attack(player.defense + health);
+        hitHealth = health - hit;
+        System.out.println(hitHealth);
+        assertTrue(health == hitHealth); 
     }
     
     //if friends with another dragon, defeatable flag set to true
+    @Test
+    public void isDefeatable(){
+        int d = boss.dragonsDefeated;
+        System.out.println(d);
+        assertTrue(d > 0);
+    }
     
 }
