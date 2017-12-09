@@ -14,9 +14,6 @@ public class EasyDragon extends Dragon{
     boolean defeated = false;
     boolean friend = false;
     
-    
-    
-
     public EasyDragon( String dname) {
         super(dname);
         this.health = 10;
@@ -24,9 +21,6 @@ public class EasyDragon extends Dragon{
         this.defense = 6;
         
     }
-    
-    
-    
      
     @Override
    public String getDifficulty(){
@@ -34,10 +28,6 @@ public class EasyDragon extends Dragon{
        return "easy";
    
    }
-   
- 
-   
-  
     
     @Override
     public int attack(int playerDefense) {
@@ -54,7 +44,22 @@ public class EasyDragon extends Dragon{
         }
         
         return hit;
+    }
     
+     //when you take this boolean use dragon.defeated as the variable
+    @Override
+    public void defeated(){
+        if (health == 0){
+            defeated = true;
+            System.out.println("The dragon has been defeated!");
+        }
+    }
     
+    @Override
+    public void befriend(boolean won){
+        if (won == true){
+            friend = true;
+            System.out.println("Item obtained");
+        }
     }
 }
