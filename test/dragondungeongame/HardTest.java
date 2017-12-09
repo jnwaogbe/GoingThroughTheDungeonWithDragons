@@ -18,21 +18,51 @@ import org.junit.Before;
 public class HardTest {
     
 Hard hard;
+Player player;
+WordGame wg;
     
     @Before
     public void setup() {
-        hard = new Hard(6, "hard" , 12);
+        hard = new Hard("hard");
+        player = new Player("player");
+        wg = new WordGame("hard");
     }
     
-//if the hit is above four the dragon should take damage
+    //test to see if the player takes damage
     @Test
-    public void doesithit() {
-        // TODO review the generated test code and remove the default call to fail.
+    public void getHit() {
+        int health, hit, hitHealth; 
         
-        if (hard.defense(13,12) > 12){
-            assertTrue("This will pass if over 12", true);
-        }
+        health = player.health;
+        hit = hard.attack(-1);
+        hitHealth = health - hit;
+        
+        assertTrue(health > hitHealth);        
+    }
+    
+    //checks to see if no damage is taken on a missed roll
+    @Test
+    public void miss(){
+        int health, hit, hitHealth; 
+        
+        health = player.health;
+        hit = hard.attack(player.defense + health);
+        hitHealth = health - hit;
+        System.out.println(hitHealth);
+        assertTrue(health == hitHealth); 
+    }
+    
+    //if won word game, friend flag set to true
+    @Test
+    public void weFriends(){
+        boolean test;
+        
+        hard.friend = wg.Win;
+        
+        test = hard.friend;
+        assertEquals(test, true);
     }
     
     
+}
 }
