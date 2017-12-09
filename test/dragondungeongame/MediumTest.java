@@ -16,23 +16,51 @@ import org.junit.Before;
  * @author Shannon
  */
 public class MediumTest {
-    
+
 Medium medium;
+Player player;
+WordGame wg;
     
     @Before
     public void setup() {
-        medium = new Medium(5, "medium" , 8);
+        medium = new Medium("easy");
+        player = new Player("player");
+        wg = new WordGame("easy");
     }
     
-//if the hit is above four the dragon should take damage
+    //test to see if the player takes damage
     @Test
-    public void doesithit() {
-        // TODO review the generated test code and remove the default call to fail.
+    public void getHit() {
+        int health, hit, hitHealth; 
         
-        if (medium.defense(9,8) > 8){
-            assertTrue("This will pass if over 8", true);
-        }
+        health = player.health;
+        hit = medium.attack(-1);
+        hitHealth = health - hit;
+        
+        assertTrue(health > hitHealth);        
     }
     
+    //checks to see if no damage is taken on a missed roll
+    @Test
+    public void miss(){
+        int health, hit, hitHealth; 
+        
+        health = player.health;
+        hit = medium.attack(player.defense + 5);
+        hitHealth = health - hit;
+        System.out.println(hitHealth);
+        assertTrue(health == hitHealth); 
+    }
+    
+    //if won word game, friend flag set to true
+    @Test
+    public void weFriends(){
+        boolean test;
+        
+        medium.friend = wg.Win;
+        
+        test = medium.friend;
+        assertEquals(test, true);
+    }
     
 }
