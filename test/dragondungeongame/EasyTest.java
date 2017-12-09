@@ -47,7 +47,8 @@ WordGame wg;
         int health, hit, hitHealth; 
         
         health = player.health;
-        hit = easy.attack(6);
+        hit = easy.attack(player.defense + health);
+        System.out.println(hit);
         hitHealth = health - hit;
         System.out.println(hitHealth);
         assertTrue(health == hitHealth); 
