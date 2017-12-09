@@ -19,23 +19,50 @@ import org.junit.Before;
 public class EasyTest {
     
 Easy easy;
+Player player;
+WordGame wg;
     
     @Before
     public void setup() {
-        easy = new Easy(3, "easy" , 5);
+        easy = new Easy("easy");
+        player = new Player("player");
+        wg = new WordGame("easy");
     }
     
-//if the hit is above four the dragon should take damage
+    //test to see if the player takes damage
     @Test
-    public void doesithit() {
-        // TODO review the generated test code and remove the default call to fail.
+    public void getHit() {
+        int health, hit, hitHealth; 
         
-        if (easy.defense(5,4) > 4){
-            assertTrue("This will pass if over 4", true);
-        }
+        health = player.health;
+        hit = easy.attack(-1);
+        hitHealth = health - hit;
+        
+        assertTrue(health > hitHealth);        
+    }
+    
+    //checks to see if no damage is taken on a missed roll
+    @Test
+    public void miss(){
+        int health, hit, hitHealth; 
+        
+        health = player.health;
+        hit = easy.attack(player.defense + health);
+        System.out.println(hit);
+        hitHealth = health - hit;
+        System.out.println(hitHealth);
+        assertTrue(health == hitHealth); 
     }
     
     //if won word game, friend flag set to true
+    @Test
+    public void weFriends(){
+        boolean test;
+        
+        easy.friend = wg.Win;
+        
+        test = easy.friend;
+        assertEquals(test, true);
+    }
 
-    
 }
