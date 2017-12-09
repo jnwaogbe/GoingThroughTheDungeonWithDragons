@@ -15,6 +15,7 @@ public class Dragon implements Character {
     public int health;
     public int defense;
     public int attackPower;
+    public boolean friend, defeated;
     public Random rand = new Random();
     
     public Dragon(String dname) {
@@ -133,11 +134,18 @@ public class Dragon implements Character {
         return Diff;
         }
 
-    
-        
-    
-        
-        
+    public void defeated(){
+        if (health == 0){
+            System.out.println("The dragon has been defeated!");
         }
+    }
+
+    public void befriend(boolean won){
+        if (won == true){
+            System.out.println("Item obtained");
+        }
+    }       
+        
+}
 
 

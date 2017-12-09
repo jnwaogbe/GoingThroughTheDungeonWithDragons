@@ -13,8 +13,6 @@ public class HardDragon extends Dragon{
     
     boolean defeated = false;
     boolean friend = false;
-    
-    
 
     public HardDragon( String dname) {
         super(dname);
@@ -24,14 +22,12 @@ public class HardDragon extends Dragon{
         
     }
     
-    
        @Override
    public String getDifficulty(){
        
        return "hard";
    
-   }
-    
+   }  
     
     @Override
     public int attack(int playerDefense) {
@@ -48,7 +44,21 @@ public class HardDragon extends Dragon{
         }
         
         return hit;
+    }
+
+    @Override
+    public void defeated(){
+        if (health == 0){
+            defeated = true;
+            System.out.println("The dragon has been defeated!");
+        }
+    }
     
-    
+    @Override
+    public void befriend(boolean won){
+        if (won == true){
+            friend = true;
+            System.out.println("Item obtained");
+        }
     }
 }
