@@ -57,9 +57,9 @@ WordGame wg;
     public void weFriends(){
         boolean test;
         
-        medium.friend = wg.Win;
-        
+        medium.befriend(true);
         test = medium.friend;
+        
         assertEquals(test, true);
     }
     
