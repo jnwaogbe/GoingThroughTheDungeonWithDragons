@@ -60,7 +60,6 @@ public class Dragon implements Character {
     public void getTreasure(){
         
         int treas = rand.nextInt(3);
-        System.out.println(treas);
         String treasu;
         
         switch(treas){
@@ -77,7 +76,6 @@ public class Dragon implements Character {
         }
         
        
-        System.out.println(treasu);
         tType = new Treasure(treasu); 
     }
     
