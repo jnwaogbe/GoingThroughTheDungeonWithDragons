@@ -15,17 +15,17 @@ import org.junit.Before;
  *
  * @author Shannon
  */
-public class MediumTest {
+public class MediumDragonTest {
 
-Medium medium;
+MediumDragon medium;
 Player player;
 WordGame wg;
     
     @Before
     public void setup() {
-        medium = new Medium("medium");
+        medium = new MediumDragon("medium");
         player = new Player("player");
-        wg = new WordGame("medium);
+        wg = new WordGame("medium");
     }
     
     //test to see if the player takes damage
@@ -57,7 +57,7 @@ WordGame wg;
     public void weFriends(){
         boolean test;
         
-        medium.befriend(true);
+        medium.befriend(true, player);
         test = medium.friend;
         
         assertEquals(test, true);
