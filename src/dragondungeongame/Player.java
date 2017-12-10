@@ -9,11 +9,12 @@ import java.util.Random;
 public class Player implements Character {
 
     public String name;
-    public int health = 60;
+    public int health = 100;
     public int attackPower = 5;
     public int defense = 5;
     public Random rand = new Random();
     public boolean isAlive = true;
+    public boolean friend = false;
 
     
     public Player(String name) {
@@ -22,6 +23,9 @@ public class Player implements Character {
     }
     
     public void greeting(){
+        if(health<0){
+            health = 0;
+        }
         System.out.println( "\n\n" + name + "! Your health is " + health + " \n Your power is " + attackPower + 
                 " \n Your defense is " + defense);
     }
@@ -30,20 +34,27 @@ public class Player implements Character {
     public String getName() {
         return name;
     }
+    
+    public void setDeath(){
+        isAlive = false;
+        health = 0;
+        System.out.println("\n\nThe dragon has killed you.");
+        
+    }
 
     @Override
     public int getHealth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return health;
     }
 
     @Override
     public int getAttack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return attackPower;
     }
 
     @Override
     public int getDefense() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return defense;
     }
 
     @Override
@@ -60,33 +71,15 @@ public class Player implements Character {
         }
         
         return hit;
-    
-    
     }
-
-    @Override
-    public String getDifficulty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-       
-
 
     @Override
     public void takeDamage(int damage){
         health = health - damage;
         if(health < 1){
             isAlive = false;
-        }
-
-        
+        }        
     }
 
-    
-
-    
-    
-
-    
+} 
 }
