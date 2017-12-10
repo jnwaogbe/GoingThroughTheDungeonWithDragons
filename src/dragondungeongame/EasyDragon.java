@@ -9,6 +9,7 @@ package dragondungeongame;
  *
  * @author Me
  */
+
 public class EasyDragon extends Dragon{
     
     boolean defeated = false;
@@ -19,15 +20,8 @@ public class EasyDragon extends Dragon{
         this.health = 10;
         this.attackPower = 5;
         this.defense = 6;
-        
+        this.Difficulty = 1;       
     }
-     
-    @Override
-   public String getDifficulty(){
-       
-       return "easy";
-   
-   }
     
     @Override
     public int attack(int playerDefense) {
@@ -56,10 +50,10 @@ public class EasyDragon extends Dragon{
     }
     
     @Override
-    public void befriend(boolean won){
+    public void befriend(boolean won, Player player){
         if (won == true){
             friend = true;
-            System.out.println("Item obtained");
+            player.attackPower = player.attackPower+5;
         }
     }
 }
