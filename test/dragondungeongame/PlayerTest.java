@@ -18,12 +18,13 @@ import org.junit.Before;
 public class PlayerTest {
     
 Player player;
+EasyDragon easy;
     
     @Before
     public void setup() {
-        player = new Player(10, "player" , 10);
+        player = new Player("player");
+        easy = new EasyDragon("easy");
     }
-
     /**
      * Test of getName method, of class Player.
      */
@@ -33,6 +34,7 @@ Player player;
         Player instance = player;
         String expResult = "player";
         String result = instance.getName();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -42,12 +44,14 @@ Player player;
     public void testGetHealth() {
         System.out.println("getHealth");
         Player instance = player;
-        int expResult = 30;
+        int expResult = player.health;
         int result = instance.getHealth();
         assertEquals(expResult, result);
     }
 
-
+    /**
+     * Test of attack method, of class Player.
+     */
     @Test
     public void testAttack() {
         System.out.println("attack");
@@ -55,20 +59,6 @@ Player player;
         Player instance = null;
         int expResult = 0;
         int result = instance.attack(powermult);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of defense method, of class Player.
-     */
-    @Test
-    public void testDefense() {
-        System.out.println("defense");
-        int attack = 0;
-        int guard = 0;
-        Player instance = null;
-        int expResult = 0;
-        int result = instance.defense(attack, guard);
         assertEquals(expResult, result);
     }
     
