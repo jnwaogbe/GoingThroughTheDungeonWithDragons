@@ -19,14 +19,8 @@ public class MediumDragon extends Dragon {
         this.health = 25;
         this.attackPower = 10;
         this.defense = 10;
+        this.Difficulty = 2;
     }
-    
-       @Override
-   public String getDifficulty(){
-       
-       return "medium";
-   
-   }
     
     @Override
     public int attack(int playerDefense) {
@@ -54,13 +48,10 @@ public class MediumDragon extends Dragon {
     } 
     
     @Override
-    public void befriend(boolean won){
+    public void befriend(boolean won, Player player){
         if (won == true){
             friend = true;
-            System.out.println("Item obtained");
+            player.attackPower = player.attackPower+10;
         }
     }
 }
-    
-    
-
