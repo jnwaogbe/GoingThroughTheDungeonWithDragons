@@ -55,29 +55,26 @@ EasyDragon easy;
     @Test
     public void testAttack() {
         System.out.println("attack");
-        int powermult = 0;
-        Player instance = null;
-        int expResult = 0;
-        int result = instance.attack(powermult);
-        assertEquals(expResult, result);
+        int before = easy.health;
+        int hit = player.attack(easy.defense);
+        int after = before - hit;
+        assertTrue(before > after);
     }
     
     //if player won the word game, attack was increased
     @Test
-    public void gameWonAttackIncrease(){
+    public void damageTaken(){
+        int before = player.health;
+        player.takeDamage(15);
+        int after = player.health;
+        assertTrue(before > after);
+    }    
     
-    }
-    
-    //if collected item/level passed, defense increases
-    @Test
-    public void levelUpDefenseIncrease(){
-    
-    }
-    
-    //if friend flag set to true, addition to health
-    @Test
-    public void friendFlagHealthAddition(){
-    
-    }
-    
+   @Test
+   public void isDead(){
+       boolean test = player.isAlive;
+       player.setDeath();
+       boolean test2 = player.isAlive;
+       assertTrue(test != test2);
+   }
 }
