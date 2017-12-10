@@ -2,7 +2,6 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-demonstration of user stories with a quick guided tour of your class diagram
  */
 package dragondungeongame;
 
@@ -16,17 +15,17 @@ import org.junit.Before;
  *
  * @author Shannon
  */
-public class EasyTest {
-    
-Easy easy;
+public class MediumDragonTest {
+
+MediumDragon medium;
 Player player;
 WordGame wg;
     
     @Before
     public void setup() {
-        easy = new Easy("easy");
+        medium = new MediumDragon("medium");
         player = new Player("player");
-        wg = new WordGame("easy");
+        wg = new WordGame("medium");
     }
     
     //test to see if the player takes damage
@@ -35,7 +34,7 @@ WordGame wg;
         int health, hit, hitHealth; 
         
         health = player.health;
-        hit = easy.attack(-1);
+        hit = medium.attack(-1);
         hitHealth = health - hit;
         
         assertTrue(health > hitHealth);        
@@ -47,8 +46,7 @@ WordGame wg;
         int health, hit, hitHealth; 
         
         health = player.health;
-        hit = easy.attack(player.defense + health);
-        System.out.println(hit);
+        hit = medium.attack(player.defense + 20);
         hitHealth = health - hit;
         System.out.println(hitHealth);
         assertTrue(health == hitHealth); 
@@ -59,10 +57,10 @@ WordGame wg;
     public void weFriends(){
         boolean test;
         
-        easy.befriend(true);
-        test = easy.friend;
+        medium.befriend(true, player);
+        test = medium.friend;
         
         assertEquals(test, true);
     }
-
+    
 }

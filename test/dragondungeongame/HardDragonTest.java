@@ -15,16 +15,17 @@ import org.junit.Before;
  *
  * @author Shannon
  */
-
-public class BossTest {
-
-    Boss boss;
-    Player player;
+public class HardDragonTest {
+    
+HardDragon hard;
+Player player;
+WordGame wg;
     
     @Before
     public void setup() {
-        boss = new Boss("boss", 1);
+        hard = new HardDragon("hard");
         player = new Player("player");
+        wg = new WordGame("hard");
     }
     
     //test to see if the player takes damage
@@ -33,7 +34,7 @@ public class BossTest {
         int health, hit, hitHealth; 
         
         health = player.health;
-        hit = boss.attack(-1);
+        hit = hard.attack(-1);
         hitHealth = health - hit;
         
         assertTrue(health > hitHealth);        
@@ -45,18 +46,21 @@ public class BossTest {
         int health, hit, hitHealth; 
         
         health = player.health;
-        hit = boss.attack(player.defense + health);
+        hit = hard.attack(player.defense + health);
         hitHealth = health - hit;
         System.out.println(hitHealth);
         assertTrue(health == hitHealth); 
     }
     
-    //if friends with another dragon, defeatable flag set to true
+    //if won word game, friend flag set to true
     @Test
-    public void isDefeatable(){
-        int d = boss.dragonsDefeated;
-        System.out.println(d);
-        assertTrue(d > 0);
+    public void weFriends(){
+        boolean test;
+        
+        hard.befriend(true, player);
+        test = hard.friend;
+        
+        assertEquals(test, true);
     }
-    
+       
 }
