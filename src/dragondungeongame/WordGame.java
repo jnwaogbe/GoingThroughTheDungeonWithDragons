@@ -37,7 +37,7 @@ public class WordGame {
     public Random rand = new Random();
     public int numOfQs;
     
-    public int questionsAsked[] = new int[10];
+    public int questionsAsked[] = new int[20];
     
     
        
@@ -92,10 +92,10 @@ public class WordGame {
                 numOfQs = 3;
                 break;
             case "medium":
-                numOfQs = 5;
+                numOfQs = 7;
                 break;
             case "hard":
-                numOfQs = 10;
+                numOfQs = 15;
                 break; 
         }
         
@@ -172,7 +172,7 @@ public class WordGame {
     }
     
     public boolean Game(){
-        System.out.println("Welcome, Traveller! \n I see you have bested the beast! It would be in your best interest to befriend her.\n "
+        System.out.println("\nWelcome, Traveller! \n I see you have bested the beast! It would be in your best interest to befriend her.\n "
                 + "Even if she is wounded by you, a simple test can prove your worthiness for her to aid you.\n Trust me. You will need her help.\n"
                 + "When presented with a question, please press the key of the corresponding number to the answer you beleive is correct.\n"
                 + "If you are incorrect, you will lose any growing trust she might have for you, and will move to the next room without her help. \n \n"
@@ -195,12 +195,13 @@ public class WordGame {
             
         }
         
+        //reader.close();
+        
         if(Win){
-               System.out.println("Congratulations! The beast is now on your side!\n"
+               System.out.println("\nCongratulations! The beast is now on your side!\n"
                        + "She will aid you in fighting the master of the dungeon. \n"
                        + "Good luck, Traveller.");
         }
-        System.out.println(Win);
     return Win;
 }
 }
