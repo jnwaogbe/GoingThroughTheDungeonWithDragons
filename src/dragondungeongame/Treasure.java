@@ -18,7 +18,7 @@ public class Treasure {
     }
     
     
-    public void PowerUp(Player player){
+    public void PowerUp(Player player, Dragon dragon){
         
         type.toLowerCase();
         
@@ -37,12 +37,8 @@ public class Treasure {
             player.attackPower = player.attackPower + 10;
         }
         
-        
+        int defenseUp = dragon.Difficulty * 5;
+        player.defense = player.defense + defenseUp;
         
     }
 }
-    
-            
-            
-            
-  
