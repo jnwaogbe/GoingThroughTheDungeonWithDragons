@@ -17,15 +17,6 @@ The trivia game: when a dragon, other than the BO$$ dragon is defeated, the play
 ////Test Running////
 To run all tests at once, open project in NetBeans IDE and go to Run > Test Project, or hit Alt + F6.
 
-To test the trivia game class separately, one may create a small main at the end of the class file, WordGame, such as 
-
-public void main(String[] args) {
-WordGame wg = new WordGame("easy");
-boolean win = wg.(game);
-}
-
-The three level options are easy, medium, and hard.
-
 ////Gameplay Instructions////
 1. Enter your name and click the play button.
 2. Click through in-game instruction screen.
