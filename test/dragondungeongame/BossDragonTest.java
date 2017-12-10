@@ -16,14 +16,14 @@ import org.junit.Before;
  * @author Shannon
  */
 
-public class BossTest {
+public class BossDragonTest {
 
-    Boss boss;
+    BossDragon boss;
     Player player;
     
     @Before
     public void setup() {
-        boss = new Boss("boss", 1);
+        boss = new BossDragon("boss", 1);
         player = new Player("player");
     }
     
