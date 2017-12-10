@@ -24,14 +24,18 @@ public class BossDragon extends Dragon{
         this.attackPower = 30;
         this.defense = 25;
         this.dragonsDefeated = dragonsDefeated;
+        this.Difficulty = 4;
     }
     
-   @Override
-   public String getDifficulty(){
-       
-       return "boss";
-   
-   }
+    @Override
+    public void defeated(){
+        if(health<1){
+            defeated = true;
+        }
+        if (health == 0){
+            System.out.println("The dragon has been defeated!");
+        }
+    }
     
     @Override
     public int attack(int playerDefense) {
@@ -59,13 +63,4 @@ public class BossDragon extends Dragon{
             System.out.println("You're unworthy of my time, perish.");
         }
     }
-    
-    @Override
-    public void defeated(){
-        if (health == 0){
-            defeated = true;
-            System.out.println("The dragon has been defeated!");
-            System.out.println("You Win!");
-        }
-    } 
 }
