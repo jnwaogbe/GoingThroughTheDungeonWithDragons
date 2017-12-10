@@ -14,9 +14,6 @@ public interface Character {
     //name
     //will return the name of the dragon
     public String getName();
-  
-    //health
-    public String getDifficulty();
     
     public int getHealth();
           
@@ -36,7 +33,5 @@ public interface Character {
     //if else for hit, must be above
     //maybe if player picks up certain items it can add a roll to hit to their
     //attack or a roll to hit to their defense, like after the roll its a plus
-    //if player has this then they get a plus bonus, that could be a test
-    
-    
+    //if player has this then they get a plus bonus, that could be a test   
 }

@@ -47,11 +47,7 @@ public class Dragon implements Character {
 
     @Override
     public int attack(int playerDefense) {
-              
-      
         return 0;
-    
-    
     }
     
     public void takeDamage(int damage){
@@ -80,13 +76,13 @@ public class Dragon implements Character {
         tType = new Treasure(treasu); 
     }
     
-    
-   
    public boolean greeting(){
        
        Scanner reader =  reader = new Scanner(System.in);
        
-       
+       if(health < 0){
+           health = 0;
+       }
 
        System.out.println("\n\nDragon: " + this.name + 
                "\n Health: " + this.health + 
@@ -96,27 +92,21 @@ public class Dragon implements Character {
        
        if(this.health > 0){
                System.out.println("Would you like to attack? Hit y for yes and any other key for no.");
-       
-             
-       if("y".equals(reader.nextLine())){
-           return true;
-       }
-       
-       else{
-           return false;}
-       }
-       else{
+              
+            if("y".equals(reader.nextLine())){
+               return true;
+            } else{
+               return false;
+            }
+       } else {
            System.out.println("Congrats! You beat the beast!");
            return true;
        }
    }
     
+    public int getDifficulty() {
         
-    
-    @Override
-    public String getDifficulty() {
-        
-        String Diff = "";
+        /*  String Diff = "";
         
         if(Difficulty == 1){
             Diff = "easy";
@@ -132,20 +122,23 @@ public class Dragon implements Character {
         }
         
         return Diff;
+                */
+        return Difficulty;
         }
 
     public void defeated(){
+        if(health<1){
+            defeated = true;
+        }
         if (health == 0){
             System.out.println("The dragon has been defeated!");
         }
     }
 
-    public void befriend(boolean won){
+    public void befriend(boolean won, Player player){
         if (won == true){
-            System.out.println("Item obtained");
+            player.attackPower++;
         }
     }       
         
 }
-
-
