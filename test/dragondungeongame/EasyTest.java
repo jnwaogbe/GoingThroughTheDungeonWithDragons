@@ -16,15 +16,15 @@ import org.junit.Before;
  *
  * @author Shannon
  */
-public class EasyTest {
+public class EasyDragonTest {
     
-Easy easy;
+EasyDragon easy;
 Player player;
 WordGame wg;
     
     @Before
     public void setup() {
-        easy = new Easy("easy");
+        easy = new EasyDragon("easy");
         player = new Player("player");
         wg = new WordGame("easy");
     }
@@ -59,7 +59,7 @@ WordGame wg;
     public void weFriends(){
         boolean test;
         
-        easy.befriend(true);
+        easy.befriend(true, player);
         test = easy.friend;
         
         assertEquals(test, true);
