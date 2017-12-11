@@ -3,9 +3,11 @@ package dragondungeongame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,19 +23,28 @@ public class Maze extends JFrame implements ActionListener {
     private JPanel mazePanel;
     private Container cp;
     private long count;
-    private MazeListener mazeListener;
     int chamberSize;
+    boolean mazeWon = false;
+    boolean finalWin = false;
 
     int dx = 0, dy = 0;
     int velx = 0, vely = 0;
+    
+    
 
+ 
     // -------------------------------------------------------------------------
     // inner class MyPanel
     // -------------------------------------------------------------------------
-    private class MyPanel extends JPanel implements MouseListener, KeyListener, ActionListener {
+    private class MyPanel extends JPanel implements KeyListener, ActionListener {
+
+        ArrayList<Line2D> rightlinelist;
+        ArrayList<Line2D> leftlinelist;
+        ArrayList<Line2D> uplinelist;
+        ArrayList<Line2D> downlinelist;
 
         BufferedImage img, img2 = null, east = null, west = null, north = null, south = null;
-        Timer t = new Timer(1, this);
+        Timer t;
         Image front = new ImageIcon("images/Sprites/sprite1.png").getImage();
         Image front1 = new ImageIcon("images/Sprites/sprite2.png").getImage();
         Image front2 = new ImageIcon("images/Sprites/sprite3.png").getImage();
@@ -41,12 +52,18 @@ public class Maze extends JFrame implements ActionListener {
         Image right1 = new ImageIcon("images/Sprites/sprite5.png").getImage();
         Image left = new ImageIcon("images/Sprites/sprite6.png").getImage();
         Image left1 = new ImageIcon("images/Sprites/sprite7.png").getImage();
+        Line2D l1, l2, l3, l4;
+
         Image image = front;
+
         boolean first = false;
-        Rectangle r = new Rectangle(35, 35, 40, 40);
+        Rectangle r = new Rectangle(dx, dy, 70, 70);
+        Rectangle r2 = new Rectangle(70 * (10 - 1), 70 * (9 - 1), 35 * 2, 35 * 2);
+
+        int move = DEFAULTCHAMBERSIZE * 2;
 
         public MyPanel() {
-            // where to go now ?
+            t = new Timer(20, this);
 
             int noRows = theMaze.length;
             int noColumns = theMaze[0].length;
@@ -59,8 +76,12 @@ public class Maze extends JFrame implements ActionListener {
             }
 
             t.start();
+            rightlinelist = new ArrayList<>();
+            leftlinelist = new ArrayList<>();
+            uplinelist = new ArrayList<>();
+            downlinelist = new ArrayList<>();
+
             setPreferredSize(new Dimension(noColumns * chamberSize, noRows * chamberSize));
-            addMouseListener(this);
             addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
@@ -82,23 +103,23 @@ public class Maze extends JFrame implements ActionListener {
 
             for (int r = 0; r < noRows; r++) {
                 for (int c = 0; c < noColumns; c++) {
+
                     int w = theMaze[r][c];
                     int posX = c * chamberSize;
                     int posY = r * chamberSize;
 
                     if ((w & 0x20) != 0) {
                         color = Color.GREEN;
-                    } //g.setColor(Color.green);          // the exit
+                    } // the exit
                     else if ((w & 0x10) != 0) {
                         color = Color.RED;
-                    } //g.setColor(Color.red);            // path
+                    } // path
                     else {
                         color = Color.ORANGE;
                     }
 
                     if (color == Color.ORANGE) {
                         g.drawImage(img2, posX, posY, chamberSize, chamberSize, this);
-
                     } else if (color == Color.GREEN) {
                         g.drawImage(img2, posX, posY, chamberSize, chamberSize, this);
                     } else {
@@ -113,29 +134,45 @@ public class Maze extends JFrame implements ActionListener {
                     int cs = chamberSize - 1;
 
                     if ((w & 1) == 1) {
-                        g2.drawLine(posX, posY, posX + cs, posY);
+                        //g2.drawLine(posX, posY, posX + cs, posY);
+                        l1 = new Line2D.Double(posX, posY, posX + cs, posY);
+                        downlinelist.add(l1);
+                        g2.draw(l1);
                     }
 
                     if ((w & 2) == 2) {
-                        g2.drawLine(posX, posY, posX, posY + cs);
+                        //g2.drawLine(posX, posY, posX, posY + cs);
+                        l2 = new Line2D.Double(posX, posY, posX, posY + cs);
+                        leftlinelist.add(l2);
+                        g2.draw(l2);
                     }
 
                     if ((w & 4) == 4) {
-                        g2.drawLine(posX, posY + cs, posX + cs, posY + cs);
+                        //g2.drawLine(posX, posY + cs, posX + cs, posY + cs);
+                        l3 = new Line2D.Double(posX, posY + cs, posX + cs, posY + cs);
+                        uplinelist.add(l3);
+                        g2.draw(l3);
+
                     }
 
                     if ((w & 8) == 8) {
-                        g2.drawLine(posX + cs, posY, posX + cs, posY + cs);
+                        //g2.drawLine(posX + cs, posY, posX + cs, posY + cs);
+                        l4 = new Line2D.Double(posX + cs, posY, posX + cs, posY + cs);
+                        g2.draw(l4);
+                        rightlinelist.add(l4);
+
                     }
                 }
             }
 
-            if (image.equals(front)) {
-                //dx = chamberSize / 2;
-            }
-            r.setBounds(dx, dy, 35, 35);
+            Graphics2D g3 = (Graphics2D) g;
 
+            r.setBounds(dx, dy, 70, 70);
             g.drawImage(image, dx, dy, this);
+            g3.setColor(Color.GREEN);
+            g3.draw(r);
+            g3.setColor(Color.RED);
+            g3.draw(r2);
 
             //System.out.println("Image pos dx: " + dx + "\nImage pos dy: " + dy);
         }
@@ -146,65 +183,40 @@ public class Maze extends JFrame implements ActionListener {
             repaint();
         }
 
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        public void mouseEntered(MouseEvent e) {
-        }
-
-        public void mouseExited(MouseEvent e) {
-        }
-
-        public void mousePressed(MouseEvent e) {
-            // clear old path entries
-            int noRows = theMaze.length;
-            int noColumns = theMaze[0].length;
-            for (int r = 0; r < noRows; r++) {
-                for (int c = 0; c < noColumns; c++) {
-                    theMaze[r][c] = (byte) (theMaze[r][c] & 0x2f);
-                }
-            }
-
-            // get mouse position
-            int x = e.getX();
-            int y = e.getY();
-            int col = (int) Math.floor(x / chamberSize);
-            int row = (int) Math.floor(y / chamberSize);
-
-            // if a listener is registered: call MazeClicked
-            if (mazeListener != null) {
-                mazeListener.MazeClicked(row, col);
-            } else {
-                System.out.println("As long as nothing is registered, a click won't do too much...");
-            }
-        }
-
         public void up() {
-            vely = -20;
-            velx = 0;
-//            dx = dx + velx;
-//            dy = dx + vely;
+            //System.out.println("Checking UP move for: posX: " + dx + " posY: " + (dy - move));
+            if (!thereIsAWall(dx, dy, 0)) {
+                vely = -move;
+                velx = 0;
+            }
         }
 
         public void down() {
-            vely = 20;
-            velx = 0;
+            //System.out.println("Checking DOWN move for: posX: " + dx + " posY: " + (dy + move));
 
+            if (!thereIsAWall(dx, dy, 1)) {
+                vely = move;
+                velx = 0;
+            }
         }
 
         public void left() {
-            vely = 0;
-            velx = -20;
+            //System.out.println("Checking LEFT move for: posX: " + (dx - move) + " posY: " + dy);
 
+            if (!thereIsAWall(dx, dy, 2)) {
+
+                vely = 0;
+                velx = -move;
+            }
         }
 
         public void right() {
-            vely = 0;
-            velx = 20;
+            //System.out.println("Checking RIGHT move for: posX: " + (dx + move) + " posY: " + dy);
 
-        }
-
-        public void mouseReleased(MouseEvent e) {
+            if (!thereIsAWall(dx, dy, 3)) {
+                vely = 0;
+                velx = move;
+            }
         }
 
         @Override
@@ -217,30 +229,38 @@ public class Maze extends JFrame implements ActionListener {
             int key = e.getKeyCode();
 
             if (key == KeyEvent.VK_UP) {
-                if (!checkForWall(dx, dy)) {
-                    up();
-                }
+
+//                if (!checkForWall(dx, dy, 0)) {
+//                    up();
+//                }
+                up();
+
                 image = front2;
             }
 
             if (key == KeyEvent.VK_DOWN) {
-                if ((!checkForWall(dx, dy))) {
-                    down();
-                }
+
+//                if ((!checkForWall(dx, dy, 1))) {
+//                    down();
+//                }
+                down();
                 image = front1;
             }
 
             if (key == KeyEvent.VK_LEFT) {
-                if ((!checkForWall(dx, dy))) {
-                    left();
-                }
+
+//                if (!checkForWall(dx, dy, 2)) {
+//                    left();
+//                }
+                left();
                 image = left;
             }
 
             if (key == KeyEvent.VK_RIGHT) {
-                if ((!checkForWall(dx, dy))) {
-                    right();
-                }
+//                if ((!checkForWall(dx, dy, 3))) {
+//                    right();
+//                }
+                right();
                 image = right;
             }
 
@@ -248,16 +268,15 @@ public class Maze extends JFrame implements ActionListener {
 
         @Override
         public void keyReleased(KeyEvent e) {
+
             int key = e.getKeyCode();
 
             if (key == KeyEvent.VK_UP) {
                 image = front1;
-
             }
 
             if (key == KeyEvent.VK_DOWN) {
                 image = front2;
-
             }
 
             if (key == KeyEvent.VK_LEFT) {
@@ -266,30 +285,65 @@ public class Maze extends JFrame implements ActionListener {
 
             if (key == KeyEvent.VK_RIGHT) {
                 image = right1;
-
             }
 
+            getToExit(dx, dy);
             velx = 0;
             vely = 0;
+
             dx = r.getBounds().x;
             dy = r.getBounds().y;
+            System.out.println("pos x: " + dx + " pos y: " + dy);
+            System.out.println("------------------------------");
 
             repaint();
+
         }
 
-        public boolean checkForWall(int x, int y) {
+        public boolean getToExit(int x, int y) {
+            if (r.intersects(r2)) {
+                System.out.println("Reached exit!");
+                runGame(finalWin);
+                
+                mazeWon = true;
+                System.out.println(mazeWon);
+                return true;
+            }
+            return false;
+        }
+
+        public boolean thereIsAWall(int x, int y, int dir) {
             int noRows = theMaze.length;
             int noColumns = theMaze[0].length;
-
+            System.out.println("At position: ");
+            System.out.println("pos x: " + dx / 70 + " pos y: " + dy / 70);
+            System.out.println("-------------------");
+            System.out.println("Checking for: ");
+            System.out.println("pos x: " + x / 70 + " pos y: " + y / 70);
             for (int r = 0; r < noRows; r++) {
                 for (int c = 0; c < noColumns; c++) {
-                    if (r == dx && c == dy && (hasNorthWall(r, c) || hasSouthWall(r, c) || hasEastWall(r, c) || hasWestWall(r, c))) {
-                        return false;
+                    if (c == (x / 70) && r == (y / 70)) {
+                        if (dir == 0) {
+                            System.out.println("Going north: " + hasNorthWall(r, c));
+                            return hasNorthWall(r, c);
+                        } else if (dir == 1) {
+                            System.out.println("Going south: " + hasSouthWall(r, c));
+                            return hasSouthWall(r, c);
+                        } else if (dir == 2) {
+                            System.out.println("Going west: " + hasWestWall(r, c));
+
+                            return hasWestWall(r, c);
+                        } else {
+                            System.out.println("Going east: " + hasEastWall(r, c));
+
+                            return hasEastWall(r, c);
+                        }
                     }
                 }
             }
 
-            return true;
+            return false;
+
         }
 
     }
@@ -302,7 +356,7 @@ public class Maze extends JFrame implements ActionListener {
         super("The Maze");
         //t.start();
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         cp = getContentPane();
         cp.setLayout(new BorderLayout());
         JButton b1 = new JButton("New Maze");
@@ -313,23 +367,6 @@ public class Maze extends JFrame implements ActionListener {
         generate(r, c);  // generate maze, draw it on panel, pack
 
         setVisible(true);
-    }
-
-    // -----------------------------------------
-    // add listener, typically a path generator
-    // -----------------------------------------
-    public void addMazeListener(MazeListener ml) {
-        mazeListener = ml;
-    }
-
-    public void showPath(Iterator i) {
-        while (i.hasNext()) {
-            Coordinate p = (Coordinate) i.next();
-            int row = (int) p.row;
-            int col = (int) p.column;
-            theMaze[row][col] |= (byte) 0x10;
-            repaint();
-        }
     }
 
     public int getMazeData(int r, int c) {
@@ -396,12 +433,17 @@ public class Maze extends JFrame implements ActionListener {
             pack();
             repaint();
         }
+
         return false;
     }
 
+    
+  
     // -------------------------
     // Recursive Maze Generation
     // -------------------------
+    
+    
     private void generateRec(int r, int c, int direction) {
         // tear down wall towards source direction
         switch (direction) {
@@ -492,18 +534,16 @@ public class Maze extends JFrame implements ActionListener {
             } while (!picked);
         }
         // base case2n cont'd: no more walkable directions left
-/*
-         for (int i = 0; i < theMaze.length; i++) {
-         for (int j = 0; j < theMaze[i].length; j++) {
-         System.out.print(theMaze[i][j] + " ");
-         }
-         System.out.println();
-         }
-         System.out.println("-------------------------------");
-         return;
-        
-        
-         */
+
+        for (int i = 0; i < theMaze.length; i++) {
+            for (int j = 0; j < theMaze[i].length; j++) {
+                System.out.print(theMaze[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("-------------------------------");
+        return;
+
     }
 
     // ---------------------------
@@ -532,4 +572,192 @@ public class Maze extends JFrame implements ActionListener {
         generate(noRows, noColumns);
 
     }
+    
+    public void runGame(boolean finalWin){
+      
+         Player Jessica = new Player("Jessica");
+        
+         
+         while(Jessica.isAlive && !finalWin){
+             
+             EasyDragon ed = new EasyDragon("Shannon");
+             
+             while(ed.health > 0){
+                 if(ed.greeting()){
+                   Jessica.greeting();
+                   int damage = Jessica.attack(ed.defense);
+                   ed.takeDamage(damage);
+                   ed.defeated();
+                   if(ed.defeated){
+                       break;
+                   }
+                   int dragdamage = ed.attack(Jessica.defense);
+                   Jessica.takeDamage(dragdamage);
+                   if(!Jessica.isAlive){
+                       break;
+                   }
+                   ed.greeting();
+               }
+
+                else{
+                     Jessica.setDeath();
+                     break;
+                 }
+             }
+             
+             
+             
+             if(!Jessica.isAlive){
+                       break;
+                   }
+
+                 ed.getTreasure();
+                 ed.tType.PowerUp(Jessica, ed);
+                 Jessica.greeting();
+                 
+                 WordGame wg = new WordGame("easy");
+                 boolean eFriend = wg.Game();
+                 ed.befriend(eFriend, Jessica);
+                                
+                 Jessica.greeting();
+                 
+               
+                        
+             MediumDragon md = new MediumDragon("Alan");
+             while(md.health > 0){
+                                                
+                 if(md.greeting()){
+                   Jessica.greeting();
+                   int damage = Jessica.attack(md.defense);
+                   md.takeDamage(damage);
+                   md.defeated();
+                   if(md.defeated){
+                       break;
+                   }
+                   int dragdamage = md.attack(Jessica.defense);
+                   Jessica.takeDamage(dragdamage);
+                   if(!Jessica.isAlive){
+                       break;
+                   }
+               }
+                 else{
+                     Jessica.setDeath();
+                     break;
+                 }
+             }
+             
+             if(!Jessica.isAlive){
+                       break;
+                   }
+             
+                 md.getTreasure();
+                 md.tType.PowerUp(Jessica, md);
+                 Jessica.greeting();
+                 
+
+                 WordGame wg2 = new WordGame("medium");
+                 boolean mFriend = wg2.Game();
+                 md.befriend(mFriend, Jessica);
+                                   
+                 Jessica.greeting();
+                 
+             
+                HardDragon hd = new HardDragon("Rita");
+                while(hd.health > 0){
+                 
+                                
+                 if(hd.greeting()){
+                   Jessica.greeting();
+                   int damage = Jessica.attack(hd.defense);
+                   hd.takeDamage(damage);
+                   hd.defeated();
+                   if(hd.defeated){
+                       break;
+                   }
+                   int dragdamage = hd.attack(Jessica.defense);
+                   Jessica.takeDamage(dragdamage);
+                   if(!Jessica.isAlive){
+                       break;
+                   }
+               }
+                   else{
+                     Jessica.setDeath();
+                     break;
+                 }
+             }
+             
+             if(!Jessica.isAlive){
+                       break;
+                   }
+             
+                 hd.getTreasure();
+                 hd.tType.PowerUp(Jessica, hd);
+                 Jessica.greeting();
+                 
+
+                 WordGame wg3= new WordGame("hard");
+                 boolean hFriend = wg3.Game();
+                 hd.befriend(hFriend, Jessica);
+                          
+                 Jessica.greeting();
+                 
+             
+        if(ed.friend||md.friend||hd.friend){
+             BossDragon bd = new BossDragon("Software Design", 1);
+             while(bd.health > 0){
+                                            
+                 if(bd.greeting()&&bd.health>0){
+                   Jessica.greeting();
+                   int damage = Jessica.attack(bd.defense);
+                   bd.takeDamage(damage);
+                   bd.defeated();
+                   if(bd.defeated){
+                       break;
+                   }
+                   int dragdamage = bd.attack(Jessica.defense);
+                   Jessica.takeDamage(dragdamage);
+                   if(!Jessica.isAlive){
+                       break;
+                   }
+               }
+                else{
+                     Jessica.setDeath();
+                     break;
+                 }       
+             }
+           finalWin = bd.defeated;
+        }
+          
+        else{
+            System.out.println("\nYou are not worthy to fight me, the BO$$ dragon.");
+            Jessica.setDeath();
+        }
+      
+        
+        if(!Jessica.isAlive){
+                       break;
+                   }
+              
+          
+             }
+             
+         if(finalWin){
+             System.out.println("Congrats! YOu have defeated the Bo$$ Dragon!!!");
+         }
+         
+         if(Jessica.health <1){
+             
+             System.out.println("You have lost");
+             System.exit(0);
+             
+         }
+         else{
+             System.out.println("Congrats! You have won!");
+                          System.exit(0);
+
+         }
+     } 
+
+
+    
 }
