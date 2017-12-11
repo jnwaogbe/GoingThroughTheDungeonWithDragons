@@ -48,7 +48,6 @@ public class WordGame {
     public String [][] questions = {{"Which of these is an ellipses?", "...", "!", "?", ".", "1"}, //0
                         {"Which word is an antoynm of abnegation?", "self-denial", "austerity", "surrender", "self-indulgence", "4"}, //1
                         {"Who played Mr. Spock in Star Trek: The Original Series?", "William Shatner", "Leonard McCoy", "Leonard Nimoy", "Willam Clinton", "3"},
-                        {"Should Karl make jerk chicken for the class?", "Definitely", "Why hasn't he yet?", "Uh, no.", "What about the vegans?", "2"},
                         {"In November 2017, a trailer was released for the Incredibles 2. \n In what month did the trailer say the movie was to come out?", "November", "December", "June", "July", "3"},
                         {"Who wrote the novel, Perelandra?", "C.S. Lewis", "Lemony Snickett", "J.R.R Tolkien", "Charles Dickens", "1"},//5
                         {"Who is the creator of Star Trek?", "Gene Roddenberry", "George Lucas", "Mike George", "JJ Abrams", "1"},
